@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
-        String inputString = perevirka();
+        String str = perevirka();
 
         while (true) {
             System.out.println("Виберіть, яку функцію викликати:");
@@ -15,16 +15,16 @@ public class Main {
                 s.nextLine();
 
                 if (diya == 1) {
-                    System.out.println("Функція, яка приймає строку. Ця функція має повертати перевернуту строку - останній символ строки має бути першим, передостанній - другим, і так далі: " + revstr(inputString));
+                    System.out.println("Функція, яка приймає строку. Ця функція має повертати перевернуту строку - останній символ строки має бути першим, передостанній - другим, і так далі: " + revstr(str));
                     break;
                 } else if (diya == 2) {
-                    System.out.println("Функція, яка приймає строку. Ця функція має повертати строку, в якій кожне слово - перевернуте. Сам порядодк слів не має змінюватись: " + revwords(inputString));
+                    System.out.println("функція, яка приймає строку. Ця функція має повертати строку, в якій кожне слово - перевернуте. Сам порядодк слів не має змінюватись: " + revwords(str));
                     break;
                 } else {
                     System.out.println("Невірний вибір! Спробуйте ще раз.");
                 }
             } else {
-                System.out.println("Будь ласка, введіть ціле число (1 або 2).");
+                System.out.println("Будь ласка, введіть ціле число (1/2).");
                 s.nextLine();
             }
         }
@@ -34,15 +34,21 @@ public class Main {
         Scanner s = new Scanner(System.in);
         String str;
         while (true) {
-            System.out.println("Введіть 2 слова, в кожному слові від 3-х літер:");
+            System.out.println("Введіть мінімум 2 слова, кожне з яких містить не менше 3 літер:");
             str = s.nextLine();
             String[] words = str.split(" ");
 
-            if (words.length == 2 && words[0].length() >= 3 && words[1].length() >= 3) {
-                return str;
-            } else {
-                System.out.println("Невірно! Перевірте, що в рядку є саме 2 слова, і кожне слово має мінімум 3 літери.");
+            if (words.length >= 2) {
+                boolean corword = true;
+                for (String word : words) {
+                    if (word.length() < 3) {
+                        corword = false;
+                        break;
+                    }
+                }
+                if (corword) return str;
             }
+            System.out.println("Невірно! Переконайтеся, що ввели щонайменше 2 слова, і кожне містить не менше 3 літер.");
         }
     }
 
